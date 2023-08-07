@@ -7,6 +7,7 @@ using System.Linq;
 public class gameManager : MonoBehaviour
 {
     public static gameManager I;
+    
 
     private void Awake()
     {
@@ -24,26 +25,37 @@ public class gameManager : MonoBehaviour
     public AudioClip mach;
     public AudioSource audioSource;
 
+    public int currentStage;
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(currentStage);
+
         // 내가 건들여야 하는 부분
         Time.timeScale = 1f;
+
+        int[] stageSize = { 2, 3, 4, 4 };
+        //float[] stageScale = { 1.7f, 1.5f, 1.3f, 1.3f };
+
+        float[] stageScale = { 1f, 1f, 1f, 1f };
 
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        for (int i = 0; i < 16; i++)
+        for(int i=0; i< stageSize[currentStage]; ++i)
         {
-            GameObject newCard = Instantiate(card);
-            newCard.transform.parent = GameObject.Find("Cards").transform;
+            for (int j=0; j < stageSize[currentStage]; ++j)
+            {
+                card.transform.localScale = new Vector3(stageScale[currentStage], stageScale[currentStage], 1f);
 
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 2.1f;
-            newCard.transform.position = new Vector3(x, y, 0);
+                GameObject newCard = Instantiate(card);
+                newCard.transform.parent = GameObject.Find("Cards").transform;
+                newCard.transform.position = new Vector3(i * stageScale[currentStage], j * stageScale[currentStage], 0);
 
-            string picName = "pic" + rtans[i].ToString();
-            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
+                string picName = "pic" + rtans[i*stageSize[currentStage]+j].ToString();
+                newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
+            } 
         }
     }
 
