@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.UIElements;
 
 public class gameManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class gameManager : MonoBehaviour
     }
 
     public Text timeTxt;
-    public GameObject endTxt;
+    public GameObject endPanel;
     public GameObject card;
     float time = 30;
 
@@ -24,11 +25,23 @@ public class gameManager : MonoBehaviour
     public AudioClip mach;
     public AudioSource audioSource;
 
+    public Text scoreTxt;
+    public Text attemptsTxt;
+    public Text finalScore;
+    public Text finalAttempts;
+    public Text highestScore;
+    int currentStage = 3;
+
+
+    int score = 0;
+    int attempts = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         // 내가 건드려야 하는 부분
         Time.timeScale = 1f;
+        highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
 
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
@@ -39,7 +52,7 @@ public class gameManager : MonoBehaviour
             newCard.transform.parent = GameObject.Find("Cards").transform;
 
             float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 2.1f;
+            float y = (i % 4) * 1.4f - 3.4f;
             newCard.transform.position = new Vector3(x, y, 0);
 
             string picName = "pic" + rtans[i].ToString();
@@ -52,11 +65,12 @@ public class gameManager : MonoBehaviour
     {
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
+        scoreTxt.text = score.ToString();
+        attemptsTxt.text = attempts.ToString();
 
         if (time <= 0f)
         {
-            Time.timeScale = 0f;
-            endTxt.SetActive(true);
+            gameOver();
         }
     }
 
@@ -64,28 +78,58 @@ public class gameManager : MonoBehaviour
     {
         string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
-    
+        
         if(firstCardImage == secondCardImage)
         {
             audioSource.PlayOneShot(mach);
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
+            score += 10;
 
             int cardsLeft = GameObject.Find("Cards").transform.childCount;
             if (cardsLeft == 2)
             {
-                Time.timeScale = 0f;
-                endTxt.SetActive(true);
+                gameOver();
             }
         }
         else
         {
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent <card>().closeCard();
+            if (score >= 2)
+            {
+                score -= 2;
+            }
+            else
+            {
+                score = 0;
+            }
         }
+        attempts += 1;
     
         firstCard = null;
         secondCard = null;
     }
 
+    public void gameOver()
+    {
+        Time.timeScale = 0f;
+        endPanel.SetActive(true);
+        score += (int)time * 5;
+
+        finalScore.text = score.ToString();
+        finalAttempts.text = attempts.ToString();
+
+        if (PlayerPrefs.HasKey("bestScore" + currentStage.ToString()) == false)
+        {
+            PlayerPrefs.SetInt("bestScore" + currentStage.ToString(), score);
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("bestScore" + currentStage.ToString()) < score)
+            {
+                PlayerPrefs.SetInt("bestScore" + currentStage.ToString(), score);
+            }
+        }
+    }
 }
