@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject firstCard;
     public GameObject secondCard;
+    public GameObject Cards;
 
     public AudioClip mach;
     public AudioSource audioSource;
@@ -61,14 +62,16 @@ public class gameManager : MonoBehaviour
                 card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
 
                 GameObject newCard = Instantiate(card);
+
                 newCard.transform.parent = GameObject.Find("Cards").transform;
                 newCard.transform.position = new Vector3((i*(cardScale+cardSpace)), (j*(cardScale+cardSpace)), 0);
-                newCard.transform.position += new Vector3(-2.0f, -3.0f);
 
                 string picName = "pic" + rtans[i * stageSize[currentStage] + j].ToString();
                 newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
             }
         }
+        Vector3 leftDown = Camera.main.ScreenToWorldPoint(new Vector3(0,0,0));
+        Cards.transform.position = leftDown + new Vector3(cardScale / 2, cardScale / 2, 0);
     }
 
     // Update is called once per frame
