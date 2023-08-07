@@ -30,9 +30,6 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(currentStage);
-
-        // 내가 건들여야 하는 부분
         Time.timeScale = 1f;
 
         int[] stageSize = { 2, 3, 4, 4 };
