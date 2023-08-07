@@ -27,7 +27,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 내가 건들여야 하는 부분
+        // 내가 건드려야 하는 부분
         Time.timeScale = 1f;
 
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
