@@ -165,6 +165,8 @@ MonoBehaviour:
   finalScore: {fileID: 1778967444}
   finalAttempts: {fileID: 1126423488}
   highestScore: {fileID: 1944551497}
+  currentStage: 2
+  maxSize: 5
 --- !u!4 &36772685
 Transform:
   m_ObjectHideFlags: 0

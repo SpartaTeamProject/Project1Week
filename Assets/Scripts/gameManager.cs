@@ -30,7 +30,9 @@ public class gameManager : MonoBehaviour
     public Text finalScore;
     public Text finalAttempts;
     public Text highestScore;
-    int currentStage = 3;
+    
+    public int currentStage = 0;
+    public int maxSize = 5;
 
 
     int score = 0;
@@ -39,24 +41,33 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 내가 건드려야 하는 부분
         Time.timeScale = 1f;
         highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
+
+        int[] stageSize = { 2, 3, 4, 4 };
+        float cardSpace = 0.15f;
+        float cardScale = (maxSize - (cardSpace * (stageSize[currentStage] -1)))/ stageSize[currentStage];
+
+        Debug.Log(cardScale);
 
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < stageSize[currentStage]; ++i)
         {
-            GameObject newCard = Instantiate(card);
-            newCard.transform.parent = GameObject.Find("Cards").transform;
+            for (int j = 0; j < stageSize[currentStage]; ++j)
+            {
+                card.transform.localScale = new Vector3(cardScale, cardScale, 1);
+                card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
 
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 3.4f;
-            newCard.transform.position = new Vector3(x, y, 0);
+                GameObject newCard = Instantiate(card);
+                newCard.transform.parent = GameObject.Find("Cards").transform;
+                newCard.transform.position = new Vector3((i*(cardScale+cardSpace)), (j*(cardScale+cardSpace)), 0);
+                newCard.transform.position += new Vector3(-2.0f, -3.0f);
 
-            string picName = "pic" + rtans[i].ToString();
-            newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
+                string picName = "pic" + rtans[i * stageSize[currentStage] + j].ToString();
+                newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
+            }
         }
     }
 
