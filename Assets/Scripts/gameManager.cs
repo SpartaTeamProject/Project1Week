@@ -51,7 +51,7 @@ public class gameManager : MonoBehaviour
             newCard.transform.parent = GameObject.Find("Cards").transform;
 
             float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 2.1f;
+            float y = (i % 4) * 1.4f - 3.4f;
             newCard.transform.position = new Vector3(x, y, 0);
 
             string rtanName = "rtan" + rtans[i].ToString();
