@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     public Text timeTxt;
     public GameObject endPanel;
     public GameObject card;
-    float time = 30;
+    public float time = 30;
 
     public GameObject firstCard;
     public GameObject secondCard;
