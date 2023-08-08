@@ -152,6 +152,17 @@ public class gameManager : MonoBehaviour
                 PlayerPrefs.SetInt("bestScore" + currentStage.ToString(), score);
             }
         }
+        //목표점수 도달 시 스테이지 해금
+        if (score >= (currentStage + 10)) //임시로 목표점수 설정
+        {
+            PlayerPrefs.SetInt("levelReached", (currentStage)); //현재 스테이지를 깨면 스테이지락 해제
+        }
+
+        if (PlayerPrefs.GetInt("levelReached") >= 4) //마지막 스테이지인 경우 (일단 4스테이지)
+        {
+            PlayerPrefs.SetInt("levelReached", 4);
+            //보상을 주거나 어떤 상호작용이 있으면 좋을듯?
+        }
     }
 
     public void SucStart()
