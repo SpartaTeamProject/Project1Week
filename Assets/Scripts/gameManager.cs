@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
     public GameObject Cards;
 
     public AudioClip mach;
+    public AudioClip unmatched;
     public AudioSource audioSource;
 
     public Text scoreTxt;
@@ -174,6 +175,7 @@ public class gameManager : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(unmatched, 0.2f);
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent <card>().closeCard();
             fail();                                     
