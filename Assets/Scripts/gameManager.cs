@@ -203,8 +203,14 @@ public class gameManager : MonoBehaviour
     public void timepenalty()
     {
         Time.timeScale = 0f;
-        time = time - 2f;
+        if (time >= 2f)
+        {
+            time = time - 2f;
+        }
+        else
+            time = 0f;
         makeminus2();
+
         Time.timeScale = 1f;
     }
     public void makeminus2()
