@@ -157,15 +157,15 @@ public class gameManager : MonoBehaviour
     public void SucStart()
     {
         successTxt.SetActive(true);
-        if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan1" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan2")
+        if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic1" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic2")
         {
             realsucTxt.text = "성공\n이도현";
         }
-        else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan2" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan3")
+        else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic2" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic3")
         {
             realsucTxt.text = "성공\n이현지";
         }
-        else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan4" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan5")
+        else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic4" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic5")
         {
             realsucTxt.text = "성공\n박민혁";
         }
