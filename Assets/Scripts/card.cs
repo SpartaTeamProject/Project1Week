@@ -43,8 +43,20 @@ public class card : MonoBehaviour
     }
     public void openCard()
     {
+
         audioSource.PlayOneShot(flip);
-        anim.SetBool("isOpen", true);
+        if (gameManager.I.currentStage == 0)
+        {
+            anim.SetBool("isOpen1", true);
+        }
+        else if (gameManager.I.currentStage == 1)
+        {
+            anim.SetBool("isOpen2", true);
+        }
+        else
+        {
+            anim.SetBool("isOpen3", true);
+        }
 
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
@@ -84,12 +96,23 @@ public class card : MonoBehaviour
 
     public void closeCard()
     {
-        Invoke("closedCardInvoke", 0.2f);
+        Invoke("closedCardInvoke", 0.5f);
     }
 
     void closedCardInvoke()
     {
-        anim.SetBool("isOpen", false);
+        if (gameManager.I.currentStage == 0)
+        {
+            anim.SetBool("isOpen1", false);
+        }
+        else if (gameManager.I.currentStage == 1)
+        {
+            anim.SetBool("isOpen2", false);
+        }
+        else
+        {
+            anim.SetBool("isOpen3", false);
+        }
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("front").gameObject.SetActive(false);
         firstOpen = false;
