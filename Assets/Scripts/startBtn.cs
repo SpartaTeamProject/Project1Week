@@ -1,28 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class startBtn : MonoBehaviour
 {
-    public void gameStart()
+
+    public AudioClip click;
+    public AudioSource startSource;
+
+
+    public async void gameStart()
     {
+        startSource.PlayOneShot(click);
+        await Task.Delay(400);
         SceneManager.LoadScene("StageScene");
     }
-    public void stage1()
+    public async void stage1()
     {
-        SceneManager.LoadScene("MainScene"); //½ºÅ×ÀÌÁö 1,2,3,4 ÇöÀç ±âÁ¸ ½ºÅ×ÀÌÁö·Î ¿¬°áÇØ³õÀ½
-    }                                         //ÇÊ¿ä ¾ø´Â°æ¿ì stage ÇÔ¼ö ÇÑ°³·Î ÁÙÀÏ°Í
-    public void stage2()
+        startSource.PlayOneShot(click);
+        await Task.Delay(400);
+        SceneManager.LoadScene("MainScene"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1,2,3,4 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
+    }                                         //ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½ stage ï¿½Ô¼ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½
+    public async void stage2()
     {
+        startSource.PlayOneShot(click);
+        await Task.Delay(400);
         SceneManager.LoadScene("MainScene");
     }
-    public void stage3()
+    public async void stage3()
     {
+        startSource.PlayOneShot(click);
+        await Task.Delay(400);
         SceneManager.LoadScene("MainScene");
     }
-    public void stage4()
+    public async void stage4()
     {
+        startSource.PlayOneShot(click);
+        await Task.Delay(400);
         SceneManager.LoadScene("MainScene");
     }
 }

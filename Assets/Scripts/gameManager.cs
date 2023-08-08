@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine.UIElements;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         Time.timeScale = 1f;
         highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
 
@@ -147,6 +149,7 @@ public class gameManager : MonoBehaviour
         {
             gameOver();
         }
+
     }
 
     public void isMatched()
