@@ -35,5 +35,8 @@ public class timeTxt : MonoBehaviour
             //오디오 매니저를 통한 사이렌 사운드 추가도 괜찮을듯?
             //==>르탄이에 오디오 소스를 단 후, 오디오 소스의 Play on Awake 기능을 통해 해결함
         }
+
+        if (gameManager.I.time < 0.01f)
+            runRtan.SetActive(false);
     }
 }
