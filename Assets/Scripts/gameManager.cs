@@ -37,7 +37,7 @@ public class gameManager : MonoBehaviour
     public GameObject Tpenalty;  
     public GameObject successTxt;
     
-    public int currentStage = 0;
+    public int currentStage = 2;
     public int maxSize = 5;
 
 

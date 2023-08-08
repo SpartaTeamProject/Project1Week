@@ -171,7 +171,7 @@ MonoBehaviour:
   realsucTxt: {fileID: 622697949}
   Tpenalty: {fileID: 8054123292444999782, guid: 294d02b6b6067864ba47832f032db475, type: 3}
   successTxt: {fileID: 139118265}
-  currentStage: 0
+  currentStage: 2
   maxSize: 5
 --- !u!4 &36772685
 Transform:

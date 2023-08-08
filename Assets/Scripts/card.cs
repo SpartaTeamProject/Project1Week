@@ -8,16 +8,19 @@ public class card : MonoBehaviour
     public Animator anim;
     public AudioClip flip;
     public AudioSource audioSource;
-    // Start is called before the first frame update
+
+    float count = 0.0f;
+    float timeLog;
+
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
     public void openCard()
     {
@@ -31,7 +34,6 @@ public class card : MonoBehaviour
         if (gameManager.I.firstCard == null)
         {
             gameManager.I.firstCard = gameObject;
-            Invoke("emptyCard", 5.0f);
 
         }
         else
@@ -39,8 +41,8 @@ public class card : MonoBehaviour
             gameManager.I.secondCard = gameObject;
             gameManager.I.isMatched();
         }
-        Invoke("emptyCard", 5.0f);
 
+        
         // 선택된 적 있는 카드의 색상 변경 (회색)
         transform.Find("back").Find("Canvas").Find("Image").GetComponent<Image>().color = new Color32(212, 212, 212, 255);
     }
@@ -48,6 +50,7 @@ public class card : MonoBehaviour
     void emptyCard() // 첫 번째 카드 선택 후 5초 지나면 다시 뒤집기
     {
         gameManager.I.firstCard = null;
+        gameManager.I.secondCard = null;
         closedCardInvoke();
 
     }
@@ -64,7 +67,7 @@ public class card : MonoBehaviour
 
     public void closeCard()
     {
-        Invoke("closedCardInvoke", 1.0f);
+        Invoke("closedCardInvoke", 0.2f);
     }
 
     void closedCardInvoke()
