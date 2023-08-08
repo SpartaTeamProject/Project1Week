@@ -165,7 +165,7 @@ public class gameManager : MonoBehaviour
         }
     }
 
-    public void SucStart()
+    public void SucStart() // 매칭 성공시 성공 텍스트 on 및 이름 변경
     {
         successTxt.SetActive(true);
         if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic0" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic1")
@@ -187,31 +187,31 @@ public class gameManager : MonoBehaviour
         realsucTxt.text = realsucTxt.text.Replace("\\n", "\n");
     }
 
-    public void failStart()
+    public void failStart() // 실패 텍스트 on
     {
         failTxt.SetActive(true);
     }
-    public void SucEnd()
+    public void SucEnd() // 성공 텍스트 off
     {
         successTxt.SetActive(false);
     }
 
-    public void failEnd()
+    public void failEnd() // 실패 텍스트 off
     {
         failTxt.SetActive(false);
     }
-    public void Success()
+    public void Success() // 성공 텍스트 on 및 1초후 off
     {
         SucStart();
         Invoke("SucEnd", 1.0f);
     }
 
-    public void fail()
+    public void fail() // 실패 텍스트 on 및 1초후 off
     {
         failStart();
         Invoke("failEnd", 1.0f);
     }
-    public void timepenalty()
+    public void timepenalty() // 실패시 시간 2초 감소
     {
         Time.timeScale = 0f;
         if (time >= 2f)
@@ -224,7 +224,7 @@ public class gameManager : MonoBehaviour
 
         Time.timeScale = 1f;
     }
-    public void makeminus2()
+    public void makeminus2() // -2초 텍스트 생성 
     {
         float x = 500f;
         float y = 900f;
