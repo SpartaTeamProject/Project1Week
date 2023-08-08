@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.UIElements;
+using System;
+using Unity.VisualScripting;
 
 public class gameManager : MonoBehaviour
 {
@@ -40,7 +42,6 @@ public class gameManager : MonoBehaviour
     public int currentStage = 2;
     public int maxSize = 5;
 
-
     int score = 0;
     int attempts = 0;
 
@@ -50,13 +51,69 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1f;
         highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
 
+        //=============== MakeBoard(currentStage)
+        //* input: 0<currentStage<4
+        // stageSize[currentStage] = 스테이지에 따른 정사각형 크기
+        // cardSpace = 카드끼리의 간격
+        // cardScale = 카드 스케일이 maxSize 내에서 자동 스케일링되도록 하는 계산식
+        // cardIndex = 기존 코드의 rtans 역할
+        
+        // 1. cardIndex 배열 초기화 후 셔플
+        // 2. card n*n개 배치
+        // 3. Cards 위치 조정.
+
         int[] stageSize = { 2, 3, 4, 4 };
+
+        // 디버그 시 무한루프 방지용도
+        if ((stageSize[currentStage]<=0) && (stageSize[currentStage] >= 4))
+            stageSize[currentStage] = 4;
+
         float cardSpace = 0.15f;
         float cardScale = (maxSize - (cardSpace * (stageSize[currentStage] -1)))/ stageSize[currentStage];
 
-        int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
-        rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
+        int cardIndexSize = Convert.ToInt32(Math.Pow(stageSize[currentStage], 2));
+        int[] cardIndex = new int[cardIndexSize];
+        int[] playerIndex = new int[cardIndexSize/2];
 
+        // 어떤 사진을 쓸 것인지 결정
+        bool[] checkOverlap = new bool[8];
+        for (int i = 0; i < playerIndex.Length; ++i)
+        {
+            int rand;
+            do
+            {
+                rand = UnityEngine.Random.Range(0, 8);
+            } while (checkOverlap[rand] == true);
+            checkOverlap[rand] = true;
+            playerIndex[i] = rand;
+        }
+
+        // 결정된 사진 2장씩 채워넣기
+        for (int i = 0; i < playerIndex.Length; ++i)
+            for (int j = 0; j < 2; ++j)
+                cardIndex[(2 * i) + j] = playerIndex[i];
+
+        //for (int i = 0; i < cardIndexSize-1; ++i)
+        //    cardIndex[i] = 0;
+
+
+        // 홀수 갯수의 카드일 경우 X 표시 추가
+        if (stageSize[currentStage]%2==1)
+            cardIndex[^1] = 99;
+
+        foreach (int i in cardIndex)
+            Debug.Log(i);
+
+        //Shuffle
+        for (int i = cardIndex.Length-1; i>0; --i)
+        {
+            int rand = UnityEngine.Random.Range(0, i + 1);
+            int temp = cardIndex[rand];
+            cardIndex[rand] = cardIndex[i];
+            cardIndex[i] = temp;
+        }
+        
+        //Placement
         for (int i = 0; i < stageSize[currentStage]; ++i)
         {
             for (int j = 0; j < stageSize[currentStage]; ++j)
@@ -69,12 +126,13 @@ public class gameManager : MonoBehaviour
                 newCard.transform.parent = GameObject.Find("Cards").transform;
                 newCard.transform.position = new Vector3((i*(cardScale+cardSpace)), (j*(cardScale+cardSpace)), 1);
 
-                string picName = "pic" + rtans[i * stageSize[currentStage] + j].ToString();
+                string picName = "pic" + cardIndex[i * stageSize[currentStage] + j].ToString();
                 newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
             }
         }
         Vector3 leftDown = Camera.main.ScreenToWorldPoint(new Vector3(0,0,0));
         Cards.transform.position = leftDown + new Vector3(0.5f + cardScale / 2, 1.5f + cardScale / 2, 0);
+        //============ end MakeBoard
     }
 
     // Update is called once per frame
