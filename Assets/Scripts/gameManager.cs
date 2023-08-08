@@ -31,6 +31,11 @@ public class gameManager : MonoBehaviour
     public Text finalScore;
     public Text finalAttempts;
     public Text highestScore;
+
+    public GameObject failTxt;  
+    public Text realsucTxt;        
+    public GameObject Tpenalty;  
+    public GameObject successTxt;
     
     public int currentStage = 0;
     public int maxSize = 5;
@@ -96,11 +101,13 @@ public class gameManager : MonoBehaviour
             audioSource.PlayOneShot(mach);
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
+            Success();
             score += 10;
 
             int cardsLeft = GameObject.Find("Cards").transform.childCount;
             if (cardsLeft == 2)
             {
+
                 gameOver();
             }
         }
@@ -108,6 +115,8 @@ public class gameManager : MonoBehaviour
         {
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent <card>().closeCard();
+            fail();                                     
+            timepenalty();
             if (score >= 2)
             {
                 score -= 2;
@@ -144,4 +153,68 @@ public class gameManager : MonoBehaviour
             }
         }
     }
+
+    public void SucStart()
+    {
+        successTxt.SetActive(true);
+        if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan1" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan2")
+        {
+            realsucTxt.text = "성공\n이도현";
+        }
+        else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan2" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan3")
+        {
+            realsucTxt.text = "성공\n이현지";
+        }
+        else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan4" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "rtan5")
+        {
+            realsucTxt.text = "성공\n박민혁";
+        }
+        else
+        {
+            realsucTxt.text = "성공\n우민규";
+        }
+        realsucTxt.text = realsucTxt.text.Replace("\\n", "\n");
+    }
+
+    public void failStart()
+    {
+        failTxt.SetActive(true);
+    }
+    public void SucEnd()
+    {
+        successTxt.SetActive(false);
+    }
+
+    public void failEnd()
+    {
+        failTxt.SetActive(false);
+    }
+    public void Success()
+    {
+        SucStart();
+        Invoke("SucEnd", 1.0f);
+    }
+
+    public void fail()
+    {
+        failStart();
+        Invoke("failEnd", 1.0f);
+    }
+    public void timepenalty()
+    {
+        Time.timeScale = 0f;
+        time = time - 2f;
+        makeminus2();
+        Time.timeScale = 1f;
+    }
+    public void makeminus2()
+    {
+        float x = 500f;
+        float y = 900f;
+        Instantiate(Tpenalty, new Vector3(x, y, 0), Quaternion.identity);
+        //gameObject.transform.parent = GameObject.Find("timeTxt").transform;
+    }
+
+
+
 }
