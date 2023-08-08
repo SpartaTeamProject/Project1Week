@@ -49,8 +49,6 @@ public class gameManager : MonoBehaviour
         float cardSpace = 0.15f;
         float cardScale = (maxSize - (cardSpace * (stageSize[currentStage] -1)))/ stageSize[currentStage];
 
-        Debug.Log(cardScale);
-
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
@@ -64,14 +62,14 @@ public class gameManager : MonoBehaviour
                 GameObject newCard = Instantiate(card);
 
                 newCard.transform.parent = GameObject.Find("Cards").transform;
-                newCard.transform.position = new Vector3((i*(cardScale+cardSpace)), (j*(cardScale+cardSpace)), 0);
+                newCard.transform.position = new Vector3((i*(cardScale+cardSpace)), (j*(cardScale+cardSpace)), 1);
 
                 string picName = "pic" + rtans[i * stageSize[currentStage] + j].ToString();
                 newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
             }
         }
         Vector3 leftDown = Camera.main.ScreenToWorldPoint(new Vector3(0,0,0));
-        Cards.transform.position = leftDown + new Vector3(cardScale / 2, cardScale / 2, 0);
+        Cards.transform.position = leftDown + new Vector3(0.5f + cardScale / 2, 1.5f + cardScale / 2, 0);
     }
 
     // Update is called once per frame
