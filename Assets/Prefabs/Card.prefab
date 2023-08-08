@@ -372,6 +372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: -6931116416372025873}
   flip: {fileID: 8300000, guid: 10f3d05345637a54eb7ed113f1811b7e, type: 3}
+  empty: {fileID: 8300000, guid: bab9841dd23d46b4eb7dd3fff90776b2, type: 3}
   audioSource: {fileID: -5311788739119509542}
 --- !u!82 &-5311788739119509542
 AudioSource:
