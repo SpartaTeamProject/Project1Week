@@ -157,21 +157,21 @@ public class gameManager : MonoBehaviour
     public void SucStart()
     {
         successTxt.SetActive(true);
-        if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic1" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic2")
+        if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic0" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic1")
         {
-            realsucTxt.text = "����\n�̵���";
+            realsucTxt.text = "성공\n이도현";
         }
         else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic2" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic3")
         {
-            realsucTxt.text = "����\n������";
+            realsucTxt.text = "성공\n이현지";
         }
         else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic4" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic5")
         {
-            realsucTxt.text = "����\n�ڹ���";
+            realsucTxt.text = "성공\n박민혁";
         }
         else
         {
-            realsucTxt.text = "����\n��α�";
+            realsucTxt.text = "성공\n우민규";
         }
         realsucTxt.text = realsucTxt.text.Replace("\\n", "\n");
     }
