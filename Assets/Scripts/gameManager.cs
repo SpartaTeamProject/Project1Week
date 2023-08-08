@@ -63,6 +63,11 @@ public class gameManager : MonoBehaviour
         // 3. Cards 위치 조정.
 
         int[] stageSize = { 2, 3, 4, 4 };
+
+        // 디버그 시 무한루프 방지용도
+        if ((stageSize[currentStage]<=0) && (stageSize[currentStage] >= 4))
+            stageSize[currentStage] = 4;
+
         float cardSpace = 0.15f;
         float cardScale = (maxSize - (cardSpace * (stageSize[currentStage] -1)))/ stageSize[currentStage];
 
@@ -70,13 +75,9 @@ public class gameManager : MonoBehaviour
         int[] cardIndex = new int[cardIndexSize];
         int[] playerIndex = new int[cardIndexSize/2];
 
-        // 디버그 시 무한루프 방지용도
-        if (stageSize[currentStage] >= 4)
-            stageSize[currentStage] = 4;
-
         // 어떤 사진을 쓸 것인지 결정
         bool[] checkOverlap = new bool[8];
-        for (int i=0; i<playerIndex.Length; ++i)
+        for (int i = 0; i < playerIndex.Length; ++i)
         {
             int rand;
             do
@@ -92,13 +93,11 @@ public class gameManager : MonoBehaviour
             for (int j = 0; j < 2; ++j)
                 cardIndex[(2 * i) + j] = playerIndex[i];
 
-        /* testcode
-        for (int i = 0; i < 48; ++i)
-            cardIndex[i] = 0;
-        */
+        //for (int i = 0; i < cardIndexSize-1; ++i)
+        //    cardIndex[i] = 0;
+
 
         // 홀수 갯수의 카드일 경우 X 표시 추가
-
         if (stageSize[currentStage]%2==1)
             cardIndex[^1] = 99;
 
