@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.UIElements;
 using System;
+using Unity.VisualScripting;
 
 public class gameManager : MonoBehaviour
 {
@@ -40,8 +41,6 @@ public class gameManager : MonoBehaviour
     
     public int currentStage = 0;
     public int maxSize = 5;
-    public int shuffleCnt = 10;
-
 
     int score = 0;
     int attempts = 0;
@@ -69,20 +68,39 @@ public class gameManager : MonoBehaviour
 
         int cardIndexSize = Convert.ToInt32(Math.Pow(stageSize[currentStage], 2));
         int[] cardIndex = new int[cardIndexSize];
+        int[] playerIndex = new int[cardIndexSize/2];
 
-        //0   2   4   6   8   10   12   14
-        //00, 11, 22, 33, 44, 5 5, 6 6, 7 7
-        /*
-        for (int i = 0, cnt = 0; i < cardIndexSize; i += 2, ++cnt)
+        // 디버그 시 무한루프 방지용도
+        if (stageSize[currentStage] >= 4)
+            stageSize[currentStage] = 4;
+
+        // 어떤 사진을 쓸 것인지 결정
+        bool[] checkOverlap = new bool[8];
+        for (int i=0; i<playerIndex.Length; ++i)
+        {
+            int rand;
+            do
+            {
+                rand = UnityEngine.Random.Range(0, 8);
+            } while (checkOverlap[rand] == true);
+            checkOverlap[rand] = true;
+            playerIndex[i] = rand;
+        }
+
+        // 결정된 사진 2장씩 채워넣기
+        for (int i = 0; i < playerIndex.Length; ++i)
             for (int j = 0; j < 2; ++j)
-                cardIndex[i + j] = cnt;
+                cardIndex[(2 * i) + j] = playerIndex[i];
+
+        /* testcode
+        for (int i = 0; i < 48; ++i)
+            cardIndex[i] = 0;
         */
 
-        for (int i = 0, cnt=0; i < cardIndex.Length; ++i, ++cnt)
-        {
-            if (cnt>7) cnt = 0;
-            cardIndex[i] = cnt;
-        }
+        // 홀수 갯수의 카드일 경우 X 표시 추가
+
+        if (stageSize[currentStage]%2==1)
+            cardIndex[^1] = 99;
 
         foreach (int i in cardIndex)
             Debug.Log(i);
@@ -95,7 +113,8 @@ public class gameManager : MonoBehaviour
             cardIndex[rand] = cardIndex[i];
             cardIndex[i] = temp;
         }
-
+        
+        //Placement
         for (int i = 0; i < stageSize[currentStage]; ++i)
         {
             for (int j = 0; j < stageSize[currentStage]; ++j)
