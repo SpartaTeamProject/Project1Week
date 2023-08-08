@@ -159,19 +159,19 @@ public class gameManager : MonoBehaviour
         successTxt.SetActive(true);
         if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic1" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic2")
         {
-            realsucTxt.text = "¼º°ø\nÀÌµµÇö";
+            realsucTxt.text = "ï¿½ï¿½ï¿½ï¿½\nï¿½Ìµï¿½ï¿½ï¿½";
         }
         else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic2" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic3")
         {
-            realsucTxt.text = "¼º°ø\nÀÌÇöÁö";
+            realsucTxt.text = "ï¿½ï¿½ï¿½ï¿½\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
         }
         else if (firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic4" || firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name == "pic5")
         {
-            realsucTxt.text = "¼º°ø\n¹Ú¹ÎÇõ";
+            realsucTxt.text = "ï¿½ï¿½ï¿½ï¿½\nï¿½Ú¹ï¿½ï¿½ï¿½";
         }
         else
         {
-            realsucTxt.text = "¼º°ø\n¿ì¹Î±Ô";
+            realsucTxt.text = "ï¿½ï¿½ï¿½ï¿½\nï¿½ï¿½Î±ï¿½";
         }
         realsucTxt.text = realsucTxt.text.Replace("\\n", "\n");
     }
