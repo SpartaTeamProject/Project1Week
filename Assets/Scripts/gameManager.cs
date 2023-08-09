@@ -149,7 +149,7 @@ public class gameManager : MonoBehaviour
             for (int j = 0; j < stageSize[currentStage]; ++j)
             {
                 card.transform.localScale = new Vector3(cardScale, cardScale, 1);
-                card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
+                //card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
 
                 GameObject newCard = Instantiate(card);
                 
