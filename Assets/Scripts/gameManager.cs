@@ -53,6 +53,7 @@ public class gameManager : MonoBehaviour
 
     public int currentStage;
     public int maxSize = 5;
+    public bool perpect = false;
 
     int score = 0;
     int attempts = 0;
@@ -65,6 +66,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        perpect = false;
         if (SceneManager.GetActiveScene().name != "MainScene" || !isMainScene)
             return;
 
@@ -225,6 +227,7 @@ public class gameManager : MonoBehaviour
             Debug.Log(cardsLeft);
             if (cardsLeft < 2)
             {
+                perpect = true;
                 gameOver();
             }
         }
@@ -253,9 +256,12 @@ public class gameManager : MonoBehaviour
     public void gameOver()
     {
         Time.timeScale = 0f;
-
+        
         score += (int)time * 5;
-
+        if (perpect == true)
+        {
+            PerpectGame();
+        }
         finalScore.text = score.ToString();
         finalAttempts.text = (attempts + 1).ToString();
 
@@ -359,6 +365,21 @@ public class gameManager : MonoBehaviour
         //gameObject.transform.parent = GameObject.Find("timeTxt").transform;
     }
 
+    public void PerpectGame() 
+    {
+        if (currentStage == 0 && attempts==1)
+        {
+            score *= 2;
+        }
+        else if (currentStage == 1 && attempts == 3)
+        {
+            score *= 2;
+        }
+        else if (currentStage >= 2 && attempts == 7)
+        {
+            score *= 2;
+        }
 
+    }
 
 }
