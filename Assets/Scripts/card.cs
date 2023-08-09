@@ -127,6 +127,8 @@ public class card : MonoBehaviour
 
     public void open()
     {
+
+
         currentStage = gameManager.I.currentStage;
         if (currentStage ==0) 
         { 
@@ -146,6 +148,7 @@ public class card : MonoBehaviour
         transform.Find("back").gameObject.SetActive(false);
         Invoke("closed", 3f);
     }
+    
     public void closed()
     {
         if (currentStage == 0)
@@ -160,6 +163,7 @@ public class card : MonoBehaviour
         {
             anim.SetBool("isOpen3", false);
         }
+
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("front").gameObject.SetActive(false);
         gameManager.I.time = 30f;
