@@ -32,7 +32,7 @@ public class count321 : MonoBehaviour
     }
     void oneshot() 
     {
-        audioSource.PlayOneShot(start);
+        audioSource.PlayOneShot(start, 0.5f);
     }
     void startSound() 
     {
