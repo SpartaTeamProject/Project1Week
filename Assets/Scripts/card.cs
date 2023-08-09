@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Diagnostics;
 using System;
+using UnityEditor.SceneManagement;
+using UnityEditor;
 
 public class card : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class card : MonoBehaviour
     public AudioClip flip;
     public AudioClip empty;
     public AudioSource audioSource;
+    public int currentStage;
     bool firstOpen = false;
     bool secondOpen = false;
     float timeCount = 0.0f;
@@ -124,16 +127,39 @@ public class card : MonoBehaviour
 
     public void open()
     {
-        //anim.SetBool("isOpen", true);
+        currentStage = gameManager.I.currentStage;
+        if (currentStage ==0) 
+        { 
+        anim.SetBool("isOpen1", true);
+        }
+        else if (currentStage == 1)
+        {
+            anim.SetBool("isOpen2", true);
+        }
+        else if (currentStage >=2)
+        {
+            anim.SetBool("isOpen3", true);
+        }
+
         gameManager.I.timeTxtObject.SetActive(false);
         transform.Find("front").gameObject.SetActive(true);
-
         transform.Find("back").gameObject.SetActive(false);
         Invoke("closed", 3f);
     }
     public void closed()
     {
-        //anim.SetBool("isOpen", false);
+        if (currentStage == 0)
+        {
+            anim.SetBool("isOpen1", false);
+        }
+        else if (currentStage == 1)
+        {
+            anim.SetBool("isOpen2", false);
+        }
+        else if (currentStage >= 2)
+        {
+            anim.SetBool("isOpen3", false);
+        }
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("front").gameObject.SetActive(false);
         gameManager.I.time = 30f;
