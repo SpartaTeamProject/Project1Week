@@ -1555,7 +1555,7 @@ MonoBehaviour:
   realsucTxt: {fileID: 0}
   Tpenalty: {fileID: 8054123292444999782, guid: 294d02b6b6067864ba47832f032db475, type: 3}
   successTxt: {fileID: 0}
-  currentStage: 1
+  currentStage: 3
   maxSize: 5
   isMainScene: 0
   isCleared: 0
