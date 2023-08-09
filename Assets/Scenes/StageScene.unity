@@ -376,7 +376,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 261144271}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: resetBtn
+        m_MethodName: ResetBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -599,7 +599,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 273790008}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: stage2
+        m_MethodName: StageBtn1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1283,7 +1283,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 643343149}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: stage3
+        m_MethodName: StageBtn2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2860,7 +2860,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1381264603}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: stage4
+        m_MethodName: StageBtn3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3245,7 +3245,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2091025153}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: stage1
+        m_MethodName: StageBtn0
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

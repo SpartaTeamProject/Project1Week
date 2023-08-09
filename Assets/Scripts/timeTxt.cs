@@ -36,7 +36,7 @@ public class timeTxt : MonoBehaviour
             //==>르탄이에 오디오 소스를 단 후, 오디오 소스의 Play on Awake 기능을 통해 해결함
         }
 
-        if (gameManager.I.time < 0.01f)
+        if (gameManager.I.endPanel)
             runRtan.SetActive(false);
     }
 }
