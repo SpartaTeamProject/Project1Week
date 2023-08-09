@@ -13,7 +13,7 @@ public class gameManager : MonoBehaviour
     {
         I = this;
     }
-
+    public GameObject timeTxtObject;
     public Text timeTxt;
     public GameObject endPanel;
     public GameObject card;
@@ -75,6 +75,8 @@ public class gameManager : MonoBehaviour
         }
         Vector3 leftDown = Camera.main.ScreenToWorldPoint(new Vector3(0,0,0));
         Cards.transform.position = leftDown + new Vector3(0.5f + cardScale / 2, 1.5f + cardScale / 2, 0);
+        //card.GetComponent<card>().open();
+        //Invoke("test", 3f);
     }
 
     // Update is called once per frame
@@ -232,6 +234,6 @@ public class gameManager : MonoBehaviour
         //gameObject.transform.parent = GameObject.Find("timeTxt").transform;
     }
 
-
+        
 
 }

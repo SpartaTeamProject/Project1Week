@@ -8,10 +8,11 @@ public class card : MonoBehaviour
     public Animator anim;
     public AudioClip flip;
     public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        open();        
     }
 
     // Update is called once per frame
@@ -54,7 +55,7 @@ public class card : MonoBehaviour
 
     public void destroyCard()
     {
-        Invoke("destroyCardInvoke", 1.0f);
+        Invoke("destroyCardInvoke", 0.1f);
     }
 
     void destroyCardInvoke()
@@ -74,5 +75,23 @@ public class card : MonoBehaviour
         transform.Find("front").gameObject.SetActive(false);
 
     }
-    
+
+    public void open()
+    {
+        //anim.SetBool("isOpen", true);
+        gameManager.I.timeTxtObject.SetActive(false);
+        transform.Find("front").gameObject.SetActive(true);
+
+        transform.Find("back").gameObject.SetActive(false);
+        Invoke("closed", 3f);
+    }
+    public void closed()
+    {
+        //anim.SetBool("isOpen", false);
+        transform.Find("back").gameObject.SetActive(true);
+        transform.Find("front").gameObject.SetActive(false);
+        gameManager.I.time = 30f;
+        gameManager.I.timeTxtObject.SetActive(true);
+
+    }
 }
