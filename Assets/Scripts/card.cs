@@ -49,18 +49,7 @@ public class card : MonoBehaviour
     {
 
         audioSource.PlayOneShot(flip);
-        if (gameManager.I.currentStage == 0)
-        {
-            anim.SetBool("isOpen1", true);
-        }
-        else if (gameManager.I.currentStage == 1)
-        {
-            anim.SetBool("isOpen2", true);
-        }
-        else
-        {
-            anim.SetBool("isOpen3", true);
-        }
+        anim.SetBool("isOpen", true);
 
         transform.Find("front").gameObject.SetActive(true);
         transform.Find("back").gameObject.SetActive(false);
@@ -106,18 +95,8 @@ public class card : MonoBehaviour
 
     void closedCardInvoke()
     {
-        if (gameManager.I.currentStage == 0)
-        {
-            anim.SetBool("isOpen1", false);
-        }
-        else if (gameManager.I.currentStage == 1)
-        {
-            anim.SetBool("isOpen2", false);
-        }
-        else
-        {
-            anim.SetBool("isOpen3", false);
-        }
+        anim.SetBool("isOpen", false);
+        
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("front").gameObject.SetActive(false);
         firstOpen = false;
@@ -130,18 +109,8 @@ public class card : MonoBehaviour
 
 
         currentStage = gameManager.I.currentStage;
-        if (currentStage ==0) 
-        { 
-        anim.SetBool("isOpen1", true);
-        }
-        else if (currentStage == 1)
-        {
-            anim.SetBool("isOpen2", true);
-        }
-        else if (currentStage >=2)
-        {
-            anim.SetBool("isOpen3", true);
-        }
+        anim.SetBool("isOpen", true);
+        
 
         gameManager.I.timeTxtObject.SetActive(false);
         transform.Find("front").gameObject.SetActive(true);
@@ -151,18 +120,7 @@ public class card : MonoBehaviour
     
     public void closed()
     {
-        if (currentStage == 0)
-        {
-            anim.SetBool("isOpen1", false);
-        }
-        else if (currentStage == 1)
-        {
-            anim.SetBool("isOpen2", false);
-        }
-        else if (currentStage >= 2)
-        {
-            anim.SetBool("isOpen3", false);
-        }
+        anim.SetBool("isOpen", false);
 
         transform.Find("back").gameObject.SetActive(true);
         transform.Find("front").gameObject.SetActive(false);
