@@ -33,7 +33,7 @@ public class levelLock : MonoBehaviour
         }
         else if(levelnum == 1)
         {
-            for (int i = 0; i < levelnum; i++)
+            for (int i = 0; i < (levelnum + 1); i++)
             {
                 stages[i].interactable = true;
                 locks[i].gameObject.SetActive(false);
@@ -42,7 +42,7 @@ public class levelLock : MonoBehaviour
         }
         else if (levelnum == 2)
         {
-            for (int i = 0; i < levelnum; i++)
+            for (int i = 0; i < (levelnum + 1); i++)
             {
                 stages[i].interactable = true;
                 locks[i].gameObject.SetActive(false);
@@ -51,7 +51,7 @@ public class levelLock : MonoBehaviour
         }
         else if (levelnum == 3)
         {
-            for (int i = 0; i < levelnum; i++)
+            for (int i = 0; i < (levelnum + 1); i++)
             {
                 stages[i].interactable = true;
                 locks[i].gameObject.SetActive(false);

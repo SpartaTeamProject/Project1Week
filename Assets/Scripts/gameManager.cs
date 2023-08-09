@@ -230,18 +230,15 @@ public class gameManager : MonoBehaviour
         finalAttempts.text = attempts.ToString();
 
 
-
-        if ((PlayerPrefs.GetInt("bestScore" + currentStage.ToString()) >= (currentStage + 10))) //해당 스테이지 키값에 이미 목표점수를 넘긴 기록이 있는지 체크
-            isCleared = true;
-
-
-
         if (PlayerPrefs.HasKey("bestScore" + currentStage.ToString()) == false)
         {
             PlayerPrefs.SetInt("bestScore" + currentStage.ToString(), score);
         }
         else
         {
+            if ((PlayerPrefs.GetInt("bestScore" + currentStage.ToString()) >= (currentStage + 10))) //해당 스테이지 키값에 이미 목표점수를 넘긴 기록이 있는지 체크
+                isCleared = true;
+
             if (PlayerPrefs.GetInt("bestScore" + currentStage.ToString()) < score)
             {
                 PlayerPrefs.SetInt("bestScore" + currentStage.ToString(), score);
