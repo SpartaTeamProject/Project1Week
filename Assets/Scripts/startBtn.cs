@@ -14,10 +14,12 @@ public class startBtn : MonoBehaviour
 
     public async void gameStart()
     {
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
         SceneManager.LoadScene("StageScene");       
     }
 
-    public void StageScene()
+    public async void StageScene()
     {
         gameManager.I.isMainScene = false;
         startSource.PlayOneShot(click, 0.5f);
@@ -28,6 +30,8 @@ public class startBtn : MonoBehaviour
     {
         gameManager.I.currentStage = 0;
         gameManager.I.isMainScene = false;
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
         SceneManager.LoadScene("MainScene"); //�������� 1,2,3,4 ���� ���� ���������� �����س���
     }                                         
     public async void stage2()
