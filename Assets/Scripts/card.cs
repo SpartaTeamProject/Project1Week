@@ -20,7 +20,7 @@ public class card : MonoBehaviour
 
     void Start()
     {
-        open();
+        open();//3초 보여주기 
     }
 
     // Update is called once per frame

@@ -20,9 +20,11 @@ public class PopupScore : MonoBehaviour
     public Text Q_RealsucTxt;
     public GameObject Q_SuccessTxt;
     public float Q_Time;
+    public GameObject Q_perpectPanel;
     // Start is called before the first frame update
     void Awake()
     {
+        gameManager.I.perpectPanel= Q_perpectPanel;
         gameManager.I.timeTxtObject=Q_timeTxtObject;
         gameManager.I.timeTxt = Q_TimeTxt;
         gameManager.I.endPanel = Q_EndPanel;

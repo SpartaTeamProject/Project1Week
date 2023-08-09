@@ -8,6 +8,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class gameManager : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class gameManager : MonoBehaviour
     public int currentStage;
     public int maxSize = 5;
     public bool perpect = false;
+    public GameObject perpectPanel;
 
     int score = 0;
     int attempts = 0;
@@ -386,8 +388,11 @@ public class gameManager : MonoBehaviour
         else if (currentStage >= 2 && attempts == 7)
         {
             score *= 2;
-        }
 
+        }
+        perpectPanel.SetActive(true);
+        perpect = false;
     }
+
 
 }
