@@ -225,7 +225,6 @@ public class gameManager : MonoBehaviour
             Debug.Log(cardsLeft);
             if (cardsLeft < 2)
             {
-
                 gameOver();
             }
         }
@@ -258,7 +257,7 @@ public class gameManager : MonoBehaviour
         score += (int)time * 5;
 
         finalScore.text = score.ToString();
-        finalAttempts.text = attempts.ToString();
+        finalAttempts.text = (attempts + 1).ToString();
 
         endPanel.SetActive(true);
 
