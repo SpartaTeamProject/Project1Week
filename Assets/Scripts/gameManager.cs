@@ -380,17 +380,19 @@ public class gameManager : MonoBehaviour
         if (currentStage == 0 && attempts==1)
         {
             score *= 2;
+            perpectPanel.SetActive(true);
         }
         else if (currentStage == 1 && attempts == 3)
         {
             score *= 2;
+            perpectPanel.SetActive(true);
         }
         else if (currentStage >= 2 && attempts == 7)
         {
             score *= 2;
+            perpectPanel.SetActive(true);
 
         }
-        perpectPanel.SetActive(true);
         perpect = false;
     }
 
