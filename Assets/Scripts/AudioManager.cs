@@ -17,6 +17,10 @@ public class AudioManager : MonoBehaviour
     public Slider slider;
     public GameObject settingPanel;
 
+
+    [SerializeField]
+    private GameObject[] VoulumeImages;
+
     private void Awake()
     {
         if (_instance == null)
@@ -73,5 +77,19 @@ public class AudioManager : MonoBehaviour
                                                                        //오디오 믹서의 볼륨값은 0~100이 아닌 -80~0 이고 & 슬라이더의 값은 0.0001 ~ 1 이다.
                                                                        //이러한 코드를 사용하는 이유는 각각의 값을 서로에게 맞추기 위해서임 
                                                                        //sliderValue에 0.0001을 대입하면 -80, 최대 값인 1을 대입하면 0이 나온다.
+
+        if (sliderValue > 0.2f) // 볼륨 아이콘 변화
+        {
+            VoulumeImages[0].SetActive(true);
+            VoulumeImages[1].SetActive(false);
+        }
+        else
+        {
+            VoulumeImages[0].SetActive(false);
+            VoulumeImages[1].SetActive(true);
+        }
+
+
     }
+
 }
