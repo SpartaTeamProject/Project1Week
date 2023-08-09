@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine.UIElements;
 using System;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -13,7 +14,16 @@ public class gameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (I != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         I = this;
+        DontDestroyOnLoad(gameObject);
+
+
     }
 
     public Text timeTxt;
@@ -34,33 +44,46 @@ public class gameManager : MonoBehaviour
     public Text finalAttempts;
     public Text highestScore;
 
-    public GameObject failTxt;  
-    public Text realsucTxt;        
-    public GameObject Tpenalty;  
+    public GameObject failTxt;
+    public Text realsucTxt;
+    public GameObject Tpenalty;
     public GameObject successTxt;
-    
-    public int currentStage = 2;
+
+    public int currentStage;
     public int maxSize = 5;
 
     int score = 0;
     int attempts = 0;
 
+
+    public bool isMainScene = false;
+    public bool isCleared = false;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+        if (SceneManager.GetActiveScene().name != "MainScene" || !isMainScene)
+            return;
+
+
         Time.timeScale = 1f;
         highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
 
+        score = 0;
+        attempts = 0;
+
+        isCleared = false;
         //=============== MakeBoard(currentStage)
         //* input: 0<currentStage<4
         // stageSize[currentStage] = 스테이지에 따른 정사각형 크기
         // cardSpace = 카드끼리의 간격
         // cardScale = 카드 스케일이 maxSize 내에서 자동 스케일링되도록 하는 계산식
         // cardIndex = 기존 코드의 rtans 역할
-        
+
         // 1. cardIndex 배열 초기화 후 셔플
         // 2. card n*n개 배치
         // 3. Cards 위치 조정.
+
 
         int[] stageSize = { 2, 3, 4, 4 };
 
@@ -138,6 +161,9 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (SceneManager.GetActiveScene().name != "MainScene" || !isMainScene)
+            return;
+
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
         scoreTxt.text = score.ToString();
@@ -193,11 +219,20 @@ public class gameManager : MonoBehaviour
     public void gameOver()
     {
         Time.timeScale = 0f;
+
         endPanel.SetActive(true);
+
         score += (int)time * 5;
 
         finalScore.text = score.ToString();
         finalAttempts.text = attempts.ToString();
+
+
+
+        if ((PlayerPrefs.GetInt("bestScore" + currentStage.ToString()) >= (currentStage + 10))) //해당 스테이지 키값에 이미 목표점수를 넘긴 기록이 있는지 체크
+            isCleared = true;
+
+
 
         if (PlayerPrefs.HasKey("bestScore" + currentStage.ToString()) == false)
         {
@@ -210,17 +245,21 @@ public class gameManager : MonoBehaviour
                 PlayerPrefs.SetInt("bestScore" + currentStage.ToString(), score);
             }
         }
+
+
+
         //목표점수 도달 시 스테이지 해금
-        if (score >= (currentStage + 10)) //임시로 목표점수 설정
+        if ((PlayerPrefs.GetInt("bestScore" + currentStage.ToString()) >= (currentStage + 10)) && !isCleared) //임시로 목표점수 설정
         {
-            PlayerPrefs.SetInt("levelReached", (currentStage)); //현재 스테이지를 깨면 스테이지락 해제
+            PlayerPrefs.SetInt("levelReached", (currentStage + 1)); //현재 스테이지를 깨면 스테이지락 해제
+
+            if (PlayerPrefs.GetInt("levelReached") >= 3) //마지막 스테이지인 경우 (일단 4스테이지)
+            {
+                PlayerPrefs.SetInt("levelReached", 3);
+                //보상을 주거나 어떤 상호작용이 있으면 좋을듯?
+            }
         }
 
-        if (PlayerPrefs.GetInt("levelReached") >= 4) //마지막 스테이지인 경우 (일단 4스테이지)
-        {
-            PlayerPrefs.SetInt("levelReached", 4);
-            //보상을 주거나 어떤 상호작용이 있으면 좋을듯?
-        }
     }
 
     public void SucStart() // 매칭 성공시 성공 텍스트 on 및 이름 변경
