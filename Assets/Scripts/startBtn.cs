@@ -16,7 +16,7 @@ public class startBtn : MonoBehaviour
     {
         startSource.PlayOneShot(click, 0.5f);
         await Task.Delay(400);
-        SceneManager.LoadScene("StageScene");       
+        SceneManager.LoadScene("StageScene");
     }
 
     public async void StageScene()
@@ -33,7 +33,7 @@ public class startBtn : MonoBehaviour
         startSource.PlayOneShot(click, 0.5f);
         await Task.Delay(400);
         SceneManager.LoadScene("MainScene"); //�������� 1,2,3,4 ���� ���� ���������� �����س���
-    }                                         
+    }
     public async void stage2()
     {
         gameManager.I.currentStage = 1;
@@ -61,6 +61,7 @@ public class startBtn : MonoBehaviour
     public void resetBtn()
     {
         PlayerPrefs.DeleteAll();
+        AudioManager._instance.settingPanel.SetActive(false);
         SceneManager.LoadScene("StartScene");
     }
     public async void reStartBtn()
@@ -69,5 +70,17 @@ public class startBtn : MonoBehaviour
         startSource.PlayOneShot(click, 0.5f);
         await Task.Delay(400);
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void CallSetting()
+    {
+        AudioManager._instance.settingPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void ExitSetting()
+    {
+        AudioManager._instance.settingPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
