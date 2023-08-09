@@ -63,4 +63,11 @@ public class startBtn : MonoBehaviour
         PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("StartScene");
     }
+    public async void reStartBtn()
+    {
+        gameManager.I.isMainScene = false;
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
+        SceneManager.LoadScene("MainScene");
+    }
 }
