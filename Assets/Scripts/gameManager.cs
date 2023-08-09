@@ -263,7 +263,15 @@ public class gameManager : MonoBehaviour
             PerpectGame();
         }
         finalScore.text = score.ToString();
-        finalAttempts.text = (attempts + 1).ToString();
+
+        if (cardsLeft < 2)
+        {
+            finalAttempts.text = (attempts + 1).ToString();
+        }
+        else
+        {
+            finalAttempts.text = attempts.ToString();
+        }
 
         endPanel.SetActive(true);
 
