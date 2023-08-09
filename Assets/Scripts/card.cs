@@ -17,7 +17,7 @@ public class card : MonoBehaviour
 
     void Start()
     {
-        
+        open();
     }
 
     // Update is called once per frame
@@ -121,6 +121,24 @@ public class card : MonoBehaviour
         secondOpen = false;
 
     }
-    
-    
+
+    public void open()
+    {
+        //anim.SetBool("isOpen", true);
+        gameManager.I.timeTxtObject.SetActive(false);
+        transform.Find("front").gameObject.SetActive(true);
+
+        transform.Find("back").gameObject.SetActive(false);
+        Invoke("closed", 3f);
+    }
+    public void closed()
+    {
+        //anim.SetBool("isOpen", false);
+        transform.Find("back").gameObject.SetActive(true);
+        transform.Find("front").gameObject.SetActive(false);
+        gameManager.I.time = 30f;
+        gameManager.I.timeTxtObject.SetActive(true);
+
+    }
+
 }

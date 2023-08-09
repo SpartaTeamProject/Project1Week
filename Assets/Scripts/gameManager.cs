@@ -25,7 +25,7 @@ public class gameManager : MonoBehaviour
 
 
     }
-
+    public GameObject timeTxtObject;
     public Text timeTxt;
     public GameObject endPanel;
     public GameObject card;
