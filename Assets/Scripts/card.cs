@@ -9,6 +9,7 @@ public class card : MonoBehaviour
 {
     public Animator anim;
     public AudioClip flip;
+    public AudioClip empty;
     public AudioSource audioSource;
     bool firstOpen = false;
     bool secondOpen = false;
@@ -80,6 +81,7 @@ public class card : MonoBehaviour
 
     void emptyCard() 
     {
+        audioSource.PlayOneShot(empty, 0.2f);
         gameManager.I.firstCard = null;
         closedCardInvoke();
     }

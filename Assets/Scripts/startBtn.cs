@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.U2D.Aseprite;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class startBtn : MonoBehaviour
 {
-    public void gameStart()
+
+    public AudioClip click;
+    public AudioSource startSource;
+
+
+    public async void gameStart()
     {
         SceneManager.LoadScene("StageScene");       
     }
@@ -14,30 +20,38 @@ public class startBtn : MonoBehaviour
     public void StageScene()
     {
         gameManager.I.isMainScene = false;
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
         SceneManager.LoadScene("StageScene");
     }
-    public void stage1()
+    public async void stage1()
     {
         gameManager.I.currentStage = 0;
         gameManager.I.isMainScene = false;
-        SceneManager.LoadScene("MainScene"); //½ºÅ×ÀÌÁö 1,2,3,4 ÇöÀç ±âÁ¸ ½ºÅ×ÀÌÁö·Î ¿¬°áÇØ³õÀ½
+        SceneManager.LoadScene("MainScene"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1,2,3,4 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
     }                                         
-    public void stage2()
+    public async void stage2()
     {
         gameManager.I.currentStage = 1;
         gameManager.I.isMainScene = false;
-        SceneManager.LoadScene("MainScene");
-    }
-    public void stage3()
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
+        SceneManager.LoadScene("MainScene"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1,2,3,4 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
+    }                                         //ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ï¿½ stage ï¿½Ô¼ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½
+    public async void stage3()
     {
         gameManager.I.currentStage = 2;
         gameManager.I.isMainScene = false;
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
         SceneManager.LoadScene("MainScene");
     }
-    public void stage4()
+    public async void stage4()
     {
         gameManager.I.currentStage = 3;
         gameManager.I.isMainScene = false;
+        startSource.PlayOneShot(click, 0.5f);
+        await Task.Delay(400);
         SceneManager.LoadScene("MainScene");
     }
     public void resetBtn()

@@ -36,6 +36,7 @@ public class gameManager : MonoBehaviour
     public GameObject Cards;
 
     public AudioClip mach;
+    public AudioClip unmatched;
     public AudioSource audioSource;
 
     public Text scoreTxt;
@@ -64,7 +65,6 @@ public class gameManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name != "MainScene" || !isMainScene)
             return;
-
 
         Time.timeScale = 1f;
         highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
@@ -173,6 +173,7 @@ public class gameManager : MonoBehaviour
         {
             gameOver();
         }
+
     }
 
     public void isMatched()
@@ -197,6 +198,7 @@ public class gameManager : MonoBehaviour
         }
         else
         {
+            audioSource.PlayOneShot(unmatched, 0.2f);
             firstCard.GetComponent<card>().closeCard();
             secondCard.GetComponent <card>().closeCard();
             fail();                                     
