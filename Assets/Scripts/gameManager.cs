@@ -209,7 +209,7 @@ public class gameManager : MonoBehaviour
 
             cardsLeft -= 2;
             Debug.Log(cardsLeft);
-            if (cardsLeft <= 0)
+            if (cardsLeft < 2)
             {
 
                 gameOver();
