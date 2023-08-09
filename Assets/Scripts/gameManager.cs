@@ -59,6 +59,7 @@ public class gameManager : MonoBehaviour
 
     public bool isMainScene = false;
     public bool isCleared = false;
+    int cardsLeft;
 
     // Start is called before the first frame update
     public void Start()
@@ -156,6 +157,23 @@ public class gameManager : MonoBehaviour
         Vector3 leftDown = Camera.main.ScreenToWorldPoint(new Vector3(0,0,0));
         Cards.transform.position = leftDown + new Vector3(0.5f + cardScale / 2, 1.5f + cardScale / 2, 0);
         //============ end MakeBoard
+
+
+        //carsLeft
+
+        if (currentStage == 0)
+        {
+            cardsLeft = 4;
+        }
+        else if (currentStage == 1)
+        {
+            cardsLeft = 9;
+        }
+        else
+        {
+            cardsLeft = 16;
+        }
+
     }
 
     // Update is called once per frame
@@ -189,8 +207,9 @@ public class gameManager : MonoBehaviour
             Success();
             score += 10;
 
-            int cardsLeft = GameObject.Find("Cards").transform.childCount;
-            if (cardsLeft == 2)
+            cardsLeft -= 2;
+            Debug.Log(cardsLeft);
+            if (cardsLeft <= 0)
             {
 
                 gameOver();
@@ -222,13 +241,12 @@ public class gameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
 
-        endPanel.SetActive(true);
-
         score += (int)time * 5;
 
         finalScore.text = score.ToString();
         finalAttempts.text = attempts.ToString();
 
+        endPanel.SetActive(true);
 
         if (PlayerPrefs.HasKey("bestScore" + currentStage.ToString()) == false)
         {
