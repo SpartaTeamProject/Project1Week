@@ -25,71 +25,68 @@ public class levelLock : MonoBehaviour
             highScoreTxt[i].text = PlayerPrefs.GetInt("bestScore" + i.ToString()).ToString();
         }
 
+    switch (levelnum)
+    {
+            case 0:
+                stages[0].interactable = true;
+                locks[0].gameObject.SetActive(false);
+                break;
 
-        if(levelnum == 0)
-        {
-            stages[0].interactable = true;
-            locks[0].gameObject.SetActive(false);
-        }
-        else if(levelnum == 1)
-        {
-            for (int i = 0; i < (levelnum + 1); i++)
-            {
-                stages[i].interactable = true;
-                locks[i].gameObject.SetActive(false);
-                Debug.Log("반복했다.");
-            }
-        }
-        else if (levelnum == 2)
-        {
-            for (int i = 0; i < (levelnum + 1); i++)
-            {
-                stages[i].interactable = true;
-                locks[i].gameObject.SetActive(false);
-                Debug.Log("반복했다.");
-            }
-        }
-        else if (levelnum == 3)
-        {
-            for (int i = 0; i < (levelnum + 1); i++)
-            {
-                stages[i].interactable = true;
-                locks[i].gameObject.SetActive(false);
-                Debug.Log("반복했다.");
-            }
+            case 1:
+                for (int i = 0; i < (levelnum + 1); i++)
+                {
+                    stages[i].interactable = true;
+                    locks[i].gameObject.SetActive(false);
+                }
+                break;
+            case 2:
+                for (int i = 0; i < (levelnum + 1); i++)
+                {
+                    stages[i].interactable = true;
+                    locks[i].gameObject.SetActive(false);
+                }
+                break;
+            case 3:
+                for (int i = 0; i < (levelnum + 1); i++)
+                {
+                    stages[i].interactable = true;
+                    locks[i].gameObject.SetActive(false);
+                }
+                break;
         }
 
         /*
-    switch (levelnum)
+if(levelnum == 0)
+{
+    stages[0].interactable = true;
+    locks[0].gameObject.SetActive(false);
+}
+else if(levelnum == 1)
+{
+    for (int i = 0; i < (levelnum + 1); i++)
     {
-        case 0:
-
-            break;
-        case 1:
-            for (int i = 0; i < levelnum; i++)
-            {
-                stages[i].interactable = true;
-                locks[i].gameObject.SetActive(false);
-                Debug.Log("반복했다.");
-            }
-            break;
-        case 2:
-            for (int i = 0; i < levelnum; i++)
-            {
-                stages[i].interactable = true;
-                locks[i].gameObject.SetActive(false);
-            }
-            break;
-        case 3:
-            for (int i = 0; i < levelnum; i++)
-            {
-                stages[i].interactable = true;
-                locks[i].gameObject.SetActive(false);
-            }
-            break;
+        stages[i].interactable = true;
+        locks[i].gameObject.SetActive(false);
     }
-        */
+}
+else if (levelnum == 2)
+{
+    for (int i = 0; i < (levelnum + 1); i++)
+    {
+        stages[i].interactable = true;
+        locks[i].gameObject.SetActive(false);
+    }
+}
+else if (levelnum == 3)
+{
+    for (int i = 0; i < (levelnum + 1); i++)
+    {
+        stages[i].interactable = true;
+        locks[i].gameObject.SetActive(false);
+    }
+}
 
+*/
 
     }
 }

@@ -13,7 +13,7 @@ public class startBtn : MonoBehaviour
     public AudioSource startSource;
 
 
-    public async void GameStart()
+    public async void GameStart() // 스타트 씬의 버튼에서는gameManager.I.isMainScene = false; 가 필요없고, 작동하지 않음
     {
         startSource.PlayOneShot(click, 0.5f);
         await Task.Delay(400);
