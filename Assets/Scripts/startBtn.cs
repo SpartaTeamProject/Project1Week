@@ -19,6 +19,7 @@ public class startBtn : MonoBehaviour
         await Task.Delay(400);
         SceneManager.LoadScene("StageScene");
         AudioManager._instance.settingPanel.SetActive(false);
+        AudioManager._instance.bTNCanvass.SetActive(true);
     }
     public async void StageBtn0()
     {
@@ -55,18 +56,28 @@ public class startBtn : MonoBehaviour
     }
     public async void StageScene()
     {
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            if (gameManager.I.failTxt.activeSelf == true || gameManager.I.successTxt.activeSelf == true)
+                await Task.Delay(2000);
+        }
+
         gameManager.I.isMainScene = false;
         startSource.PlayOneShot(click, 0.5f);
         await Task.Delay(400); // 매칭 성공 실패 텍스트가 사라지기 전에 누르니 missing에러가 발생합니다, 충분한 시간 이후 씬 이동을 진행합니다. 
         SceneManager.LoadScene("StageScene");
     }
-    public void ResetBtn()
+    public async void ResetBtn()
     {
-        if (gameManager.I.failTxt.activeSelf == true || gameManager.I.successTxt.activeSelf == true || gameManager.I.failTxt == null || gameManager.I.successTxt == null)
-            return;
+        if (SceneManager.GetActiveScene().name == "MainScene")
+        {
+            if (gameManager.I.failTxt.activeSelf == true || gameManager.I.successTxt.activeSelf == true)
+                await Task.Delay(2000);
+        }
 
         PlayerPrefs.DeleteAll();
         AudioManager._instance.settingPanel.SetActive(false);
+        AudioManager._instance.bTNCanvass.SetActive(false);
         SceneManager.LoadScene("StartScene");
     }
 
