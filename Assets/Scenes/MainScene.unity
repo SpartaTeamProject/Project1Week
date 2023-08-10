@@ -2382,6 +2382,7 @@ MonoBehaviour:
   runRtan: {fileID: 1323042904}
   anim: {fileID: 7572350003019007565}
   rtanSpeed: -0.0125
+  originSpeed: 0
 --- !u!222 &4199738697813520636
 CanvasRenderer:
   m_ObjectHideFlags: 0
