@@ -61,6 +61,9 @@ public class startBtn : MonoBehaviour
     }
     public void resetBtn()
     {
+        if (gameManager.I.failTxt.activeSelf == true || gameManager.I.successTxt.activeSelf == true || gameManager.I.failTxt == null || gameManager.I.successTxt == null)
+            return;
+
         PlayerPrefs.DeleteAll();
         AudioManager._instance.settingPanel.SetActive(false);
         SceneManager.LoadScene("StartScene");
