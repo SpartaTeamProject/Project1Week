@@ -27,6 +27,7 @@ public class gameManager : MonoBehaviour
 
 
     }
+    public GameObject cam;
     public GameObject timeTxtObject;
     public Text timeTxt;
     public GameObject endPanel;
@@ -79,6 +80,28 @@ public class gameManager : MonoBehaviour
         attempts = 0;
 
         isCleared = false;
+
+        //----Background Color Setting
+
+        if (currentStage == 0)
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(255, 224, 115, 255); 
+        }
+        else if (currentStage == 1)
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(116, 228, 255, 255);
+        }
+        else if (currentStage == 2)
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(255, 170, 86, 255);
+        }
+        else
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(129, 243, 77, 255);
+        }
+
+
+
         //=============== MakeBoard(currentStage)
         //* input: 0<currentStage<4
         // stageSize[currentStage] = 스테이지에 따른 정사각형 크기
