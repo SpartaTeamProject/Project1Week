@@ -1333,7 +1333,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 791003296}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: gameStart
+        m_MethodName: GameStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1832,7 +1832,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1107032631}
         m_TargetAssemblyTypeName: startBtn, Assembly-CSharp
-        m_MethodName: resetBtn
+        m_MethodName: ResetBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2377,12 +2377,12 @@ GameObject:
   - component: {fileID: 1707581563}
   - component: {fileID: 1707581562}
   m_Layer: 0
-  m_Name: BTNCanvas
+  m_Name: BTNCanvass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1707581561
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3247,6 +3247,7 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: 6d1d03c7d2882824493b091f45cca6b1, type: 2}
   slider: {fileID: 327234200}
   settingPanel: {fileID: 1453135267}
+  bTNCanvass: {fileID: 1707581560}
   VoulumeImages:
   - {fileID: 1315464813}
   - {fileID: 82000210}
