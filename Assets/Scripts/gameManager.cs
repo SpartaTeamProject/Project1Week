@@ -228,6 +228,17 @@ public class gameManager : MonoBehaviour
         scoreTxt.text = score.ToString();
         attemptsTxt.text = attempts.ToString();
 
+        if (score > PlayerPrefs.GetInt("bestScore" + currentStage.ToString()))
+        {
+            highestScore.text = score.ToString();
+            highestScore.GetComponent<Text>().color = new Color32(138, 0, 0, 255);
+        }
+        else
+        {
+            highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
+            highestScore.GetComponent<Text>().color = new Color32(238, 74, 74, 255);
+        }
+
         if (time <= 0f)
         {
             gameOver();
