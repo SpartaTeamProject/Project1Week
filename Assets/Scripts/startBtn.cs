@@ -17,6 +17,7 @@ public class startBtn : MonoBehaviour
         startSource.PlayOneShot(click, 0.5f);
         await Task.Delay(400);
         SceneManager.LoadScene("StageScene");
+        AudioManager._instance.settingPanel.SetActive(false);
     }
 
     public async void StageScene()
