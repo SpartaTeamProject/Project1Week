@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cc099e2f51b604d9997e28e0c15bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   timeTxtObject: {fileID: 0}
   timeTxt: {fileID: 8313016943687508830}
   endPanel: {fileID: 5144648368438919069}
@@ -680,7 +681,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 0.8784314, b: 0.4509804, a: 0}
+  m_BackGroundColor: {r: 1, g: 0.8784314, b: 0.4509804, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -874,6 +875,7 @@ MonoBehaviour:
   mixer: {fileID: 0}
   slider: {fileID: 0}
   settingPanel: {fileID: 0}
+  VoulumeImages: []
 --- !u!4 &1197139032
 Transform:
   m_ObjectHideFlags: 0
@@ -1724,6 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1abb365cebb8024aa4a9c9f9c77340d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Q_Cam: {fileID: 519420028}
   Q_timeTxtObject: {fileID: 995959219}
   Q_TimeTxt: {fileID: 8313016943687508830}
   Q_EndPanel: {fileID: 5144648368438919069}
