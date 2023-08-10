@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 using System;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class gameManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class gameManager : MonoBehaviour
 
 
     }
-
+    public GameObject timeTxtObject;
     public Text timeTxt;
     public GameObject endPanel;
     public GameObject card;
@@ -136,7 +137,8 @@ public class gameManager : MonoBehaviour
             cardIndex[rand] = cardIndex[i];
             cardIndex[i] = temp;
         }
-        
+
+
         //Placement
         for (int i = 0; i < stageSize[currentStage]; ++i)
         {
@@ -146,12 +148,24 @@ public class gameManager : MonoBehaviour
                 card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
 
                 GameObject newCard = Instantiate(card);
+                
 
                 newCard.transform.parent = GameObject.Find("Cards").transform;
                 newCard.transform.position = new Vector3((i*(cardScale+cardSpace)), (j*(cardScale+cardSpace)), 1);
 
                 string picName = "pic" + cardIndex[i * stageSize[currentStage] + j].ToString();
                 newCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(picName);
+
+                //imageRotate on stage 4
+                if (currentStage == 3)
+                {
+                    float[] angles = { 0, 90, 180, 270 };
+                    angles = angles.OrderBy(item => UnityEngine.Random.Range(-1.0f, 1.0f)).ToArray();
+                    newCard.transform.Find("front").transform.eulerAngles = new Vector3(0, 0, angles[0]);
+                }
+                //====================
+
+
             }
         }
         Vector3 leftDown = Camera.main.ScreenToWorldPoint(new Vector3(0,0,0));
@@ -209,7 +223,7 @@ public class gameManager : MonoBehaviour
 
             cardsLeft -= 2;
             Debug.Log(cardsLeft);
-            if (cardsLeft <= 0)
+            if (cardsLeft < 2)
             {
 
                 gameOver();
