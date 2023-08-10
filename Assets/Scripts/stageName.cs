@@ -29,7 +29,7 @@ public class stageName : MonoBehaviour
         {
             stage.text = "stage 03";
         }
-        else if (currentStage == 2)
+        else if (currentStage == 3)
         {
             stage.text = "stage 04";
         }
