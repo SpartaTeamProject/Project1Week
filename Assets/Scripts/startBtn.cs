@@ -81,12 +81,14 @@ public class startBtn : MonoBehaviour
     public void CallSetting()
     {
         AudioManager._instance.settingPanel.SetActive(true);
+        startSource.PlayOneShot(click, 0.5f);
         Time.timeScale = 0f;
     }
 
     public void ExitSetting()
     {
         AudioManager._instance.settingPanel.SetActive(false);
+        startSource.PlayOneShot(click, 0.5f);
         Time.timeScale = 1f;
     }
 }
