@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     public AudioMixer mixer;
     public Slider slider;
     public GameObject settingPanel;
+    public GameObject bTNCanvass;
 
 
     [SerializeField]
