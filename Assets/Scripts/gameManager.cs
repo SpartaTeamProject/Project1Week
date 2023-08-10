@@ -8,6 +8,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class gameManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class gameManager : MonoBehaviour
 
 
     }
+    public GameObject cam;
     public GameObject timeTxtObject;
     public Text timeTxt;
     public GameObject endPanel;
@@ -53,6 +55,8 @@ public class gameManager : MonoBehaviour
 
     public int currentStage;
     public int maxSize = 5;
+    public bool perpect = false;
+    public GameObject perpectPanel;
 
     int score = 0;
     int attempts = 0;
@@ -65,6 +69,7 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        perpect = false;
         if (SceneManager.GetActiveScene().name != "MainScene" || !isMainScene)
             return;
 
@@ -75,6 +80,28 @@ public class gameManager : MonoBehaviour
         attempts = 0;
 
         isCleared = false;
+
+        //----Background Color Setting
+
+        if (currentStage == 0)
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(255, 224, 115, 255); 
+        }
+        else if (currentStage == 1)
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(116, 228, 255, 255);
+        }
+        else if (currentStage == 2)
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(255, 170, 86, 255);
+        }
+        else
+        {
+            cam.GetComponent<Camera>().backgroundColor = new Color32(129, 243, 77, 255);
+        }
+
+
+
         //=============== MakeBoard(currentStage)
         //* input: 0<currentStage<4
         // stageSize[currentStage] = 스테이지에 따른 정사각형 크기
@@ -145,7 +172,7 @@ public class gameManager : MonoBehaviour
             for (int j = 0; j < stageSize[currentStage]; ++j)
             {
                 card.transform.localScale = new Vector3(cardScale, cardScale, 1);
-                card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
+                //card.transform.Find("front").localScale = new Vector3(cardScale, cardScale, 1);
 
                 GameObject newCard = Instantiate(card);
                 
@@ -201,6 +228,17 @@ public class gameManager : MonoBehaviour
         scoreTxt.text = score.ToString();
         attemptsTxt.text = attempts.ToString();
 
+        if (score > PlayerPrefs.GetInt("bestScore" + currentStage.ToString()))
+        {
+            highestScore.text = score.ToString();
+            highestScore.GetComponent<Text>().color = new Color32(138, 0, 0, 255);
+        }
+        else
+        {
+            highestScore.text = PlayerPrefs.GetInt("bestScore" + currentStage.ToString()).ToString();
+            highestScore.GetComponent<Text>().color = new Color32(238, 74, 74, 255);
+        }
+
         if (time <= 0f)
         {
             gameOver();
@@ -225,7 +263,7 @@ public class gameManager : MonoBehaviour
             Debug.Log(cardsLeft);
             if (cardsLeft < 2)
             {
-
+                perpect = true;
                 gameOver();
             }
         }
@@ -254,11 +292,22 @@ public class gameManager : MonoBehaviour
     public void gameOver()
     {
         Time.timeScale = 0f;
-
+        
         score += (int)time * 5;
-
+        if (perpect == true)
+        {
+            PerpectGame();
+        }
         finalScore.text = score.ToString();
-        finalAttempts.text = attempts.ToString();
+
+        if (cardsLeft < 2)
+        {
+            finalAttempts.text = (attempts + 1).ToString();
+        }
+        else
+        {
+            finalAttempts.text = attempts.ToString();
+        }
 
         endPanel.SetActive(true);
 
@@ -360,6 +409,26 @@ public class gameManager : MonoBehaviour
         //gameObject.transform.parent = GameObject.Find("timeTxt").transform;
     }
 
+    public void PerpectGame() 
+    {
+        if (currentStage == 0 && attempts==1)
+        {
+            score *= 2;
+            perpectPanel.SetActive(true);
+        }
+        else if (currentStage == 1 && attempts == 3)
+        {
+            score *= 2;
+            perpectPanel.SetActive(true);
+        }
+        else if (currentStage >= 2 && attempts == 7)
+        {
+            score *= 2;
+            perpectPanel.SetActive(true);
+
+        }
+        perpect = false;
+    }
 
 
 }

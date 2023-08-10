@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PopupScore : MonoBehaviour
 {
+    public GameObject Q_Cam;
     public GameObject Q_timeTxtObject;
     public Text Q_TimeTxt;
     public GameObject Q_EndPanel;
@@ -20,9 +21,12 @@ public class PopupScore : MonoBehaviour
     public Text Q_RealsucTxt;
     public GameObject Q_SuccessTxt;
     public float Q_Time;
+    public GameObject Q_perpectPanel;
     // Start is called before the first frame update
     void Awake()
     {
+        gameManager.I.cam = Q_Cam;
+        gameManager.I.perpectPanel= Q_perpectPanel;
         gameManager.I.timeTxtObject=Q_timeTxtObject;
         gameManager.I.timeTxt = Q_TimeTxt;
         gameManager.I.endPanel = Q_EndPanel;
@@ -42,7 +46,7 @@ public class PopupScore : MonoBehaviour
         gameManager.I.isMainScene = true;
 
         gameManager.I.Start();
-        //¸¶Áö¸·ÁÙ¿¡ »óÅÂº¯È­ bool 
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½Âºï¿½È­ bool 
     }
 
     // Update is called once per frame

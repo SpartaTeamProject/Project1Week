@@ -16,8 +16,9 @@ public class startBtn : MonoBehaviour
     public async void GameStart()
     {
         startSource.PlayOneShot(click, 0.5f);
-        await Task.Delay(400); //사운드 실행을 위한 텀
-        SceneManager.LoadScene("StageScene");       
+        await Task.Delay(400);
+        SceneManager.LoadScene("StageScene");
+        AudioManager._instance.settingPanel.SetActive(false);
     }
     public async void StageBtn0()
     {
@@ -28,6 +29,7 @@ public class startBtn : MonoBehaviour
         SceneManager.LoadScene("MainScene"); //�������� 1,2,3,4 ���� ���� ���������� �����س���
     }                                         
     public async void StageBtn1()
+
     {
         gameManager.I.currentStage = 1;
         gameManager.I.isMainScene = false;
@@ -61,6 +63,7 @@ public class startBtn : MonoBehaviour
     public void ResetBtn()
     {
         PlayerPrefs.DeleteAll();
+        AudioManager._instance.settingPanel.SetActive(false);
         SceneManager.LoadScene("StartScene");
     }
 
@@ -72,4 +75,15 @@ public class startBtn : MonoBehaviour
         SceneManager.LoadScene("MainScene");
     }
 
+    public void CallSetting()
+    {
+        AudioManager._instance.settingPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void ExitSetting()
+    {
+        AudioManager._instance.settingPanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
 }

@@ -32,7 +32,6 @@ public class timeTxt : MonoBehaviour
                 runRtan.transform.position += new Vector3(rtanSpeed, 0, 0);
             //대충 적절하게 르탄이가 다 지나가면 타임 오버&&르탄이 이동정지, 비활성화
 
-            //오디오 매니저를 통한 사이렌 사운드 추가도 괜찮을듯?
             //==>르탄이에 오디오 소스를 단 후, 오디오 소스의 Play on Awake 기능을 통해 해결함
         }
 
